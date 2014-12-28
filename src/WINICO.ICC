@@ -1,0 +1,15 @@
+option  link(pmtype, vio), gen(arch, "pentium2"), opt(level, "2"),
+opt(tune, "pentium2"), opt(size, "yes"), gen(profile, "no")
+{
+   target "winico.exe"
+   {
+      source "intro.cpp"
+      source type(cpp) "main.cpp", "BitmapHeader.hpp", "IconDirEntry.hpp",
+      "RgbQuad.hpp", "IconDir.hpp", "IconMgr.hpp", "Icon.cpp",
+      "IconMgr.cpp", "IconImage.hpp", "IconsVar.hpp", "IconsVar.cpp"
+      option macros(global, "yes")
+      {
+         source type(cpp) "Icon.hpp"
+      }
+   }
+}
