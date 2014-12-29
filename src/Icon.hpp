@@ -1,6 +1,12 @@
+#ifndef ICON_HPP
+#define ICON_HPP
+
 #define INCL_GPIBITMAPS
 #define INCL_GPI
 #include <os2.h>
+
+#include "IconsVar.hpp"
+#include "IconImage.hpp"
 
 struct IconError{
    const char* msg;
@@ -126,3 +132,4 @@ class Os2Icon20:public Os2Icon{
 
 };
 
+#endif

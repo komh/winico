@@ -1,6 +1,17 @@
+#define INCL_GPI
 #define INCL_DOSERRORS
 #include <os2.h>
 
+#include <iostream>
+
+#include "Icon.hpp"
+#include "IconMgr.hpp"
+
+using namespace std;
+
+// forward declaration
+int checkType(char *archivo);
+void error_exit(int errorcode);
 
 void printError(IconError& error){
    cout << " " << error.function << endl << " " << error.file << '(' << error.line << ')'

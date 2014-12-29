@@ -1,3 +1,7 @@
+#ifndef ICONS_VAR_HPP
+#define ICONS_VAR_HPP
+
+#define INCL_GPI
 #include <os2.h>
 
 class IconBIH{
@@ -53,3 +57,5 @@ class IconAFH{
       USHORT      cxDisplay;
       USHORT      cyDisplay;
 };
+
+#endif

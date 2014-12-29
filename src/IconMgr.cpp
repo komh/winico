@@ -1,3 +1,9 @@
+#include <iostream>
+
+#include "IconMgr.hpp"
+
+using namespace std;
+
 #define ICONO_20X20  20
 #define ICONO_40X40  40
 

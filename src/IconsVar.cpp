@@ -1,3 +1,5 @@
+#include "IconsVar.hpp"
+
 IconBIH::IconBIH(){
    cbFix       = 0;
    cx          = 0;

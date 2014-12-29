@@ -1,3 +1,6 @@
+#ifndef BITMAP_HEADER_HPP
+#define BITMAP_HEADER_HPP
+
 #include <os2.h>
 
 class BitmapHeader{
@@ -102,3 +105,5 @@ class BitmapHeader{
          return biClrImportant;
       }
    };
+
+#endif

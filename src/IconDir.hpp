@@ -1,3 +1,8 @@
+#ifndef ICON_DIR_HPP
+#define ICON_DIR_HPP
+
+#include "IconDirEntry.hpp"
+
 class IconDir{
 
    USHORT   idReserved;
@@ -25,7 +30,7 @@ class IconDir{
       USHORT getIdCount(){
          return idCount;
       }
-      vector<IconDirEntry*> getIdEntries(){
+      std::vector<IconDirEntry*> getIdEntries(){
          return idEntries;
       }
 
@@ -41,6 +46,8 @@ class IconDir{
          idCount = valor;
          }
 
-      vector<IconDirEntry*> idEntries;
+      std::vector<IconDirEntry*> idEntries;
 
 };
+
+#endif

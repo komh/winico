@@ -1,8 +1,12 @@
+#ifndef ICON_MGR_HPP
+#define ICON_MGR_HPP
+
 #include <vector>
 #include <iterator>
 #include <algorithm>
 
-using namespace std;
+#include "Icon.hpp"
+#include "IconDir.hpp"
 
 class IconMgr{
    public:
@@ -12,6 +16,7 @@ class IconMgr{
       int identidad;
 };
 
+class Os2IconMgr12;     // forward declaration
 
 class WiconMgr:public IconMgr{
    public:
@@ -50,7 +55,7 @@ class Os2IconMgr:public IconMgr{
       PBYTE centerImageData(PBYTE data, const int tamanio, int bits);
       int numImages;
    private:
-      vector<Os2Icon> *listaiconos;
+      std::vector<Os2Icon> *listaiconos;
 };
 
 class Os2IconMgr12:public Os2IconMgr{
@@ -72,7 +77,7 @@ class Os2IconMgr12:public Os2IconMgr{
       void llenaOffSets();
       ULONG sizeAllPaletas();
       ULONG firstOffSet();
-      vector<Os2Icon12*> listaImagenes;
+      std::vector<Os2Icon12*> listaImagenes;
 };
 
 class Os2IconMgr20:public Os2IconMgr{
@@ -84,7 +89,8 @@ class Os2IconMgr20:public Os2IconMgr{
       ULONG firstOffSet();
       void llenaOffSets();
    private:
-      vector<Os2Icon20> *listaiconos;
+      std::vector<Os2Icon20> *listaiconos;
       int freeIconMem();
 };
 
+#endif

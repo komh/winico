@@ -1,3 +1,9 @@
+#ifndef ICON_IMAGE_HPP
+#define ICON_IMAGE_HPP
+
+#include "BitmapHeader.hpp"
+#include "RgbQuad.hpp"
+
 class IconImage{
    public:
       IconImage();
@@ -66,3 +72,5 @@ class IconImage{
       int numcolores;
       int numBytesInImg;
 };
+
+#endif

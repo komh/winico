@@ -1,3 +1,8 @@
+#include <cstdlib>
+#include <cstring>
+
+#include "Icon.hpp"
+
 int Os2Icon::ipow(int b, int e){
    int p=b;
    while(--e)

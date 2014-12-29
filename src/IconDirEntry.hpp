@@ -1,3 +1,6 @@
+#ifndef ICON_DIR_ENTRY_HPP
+#define ICON_DIR_ENTRY_HPP
+
 class IconDirEntry{
    BYTE  bWidth;
    BYTE  bHeight;
@@ -53,3 +56,5 @@ class IconDirEntry{
          return datosImagen;
       }
    };
+
+#endif

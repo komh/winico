@@ -1,6 +1,11 @@
 #include <iostream>
 #include <fstream>
 
+// declared in intro.cpp
+int unoAuno(char *archivoin, char *archivout);
+int todosIco(char *nuevoDir);
+void error_exit(int errorcode);
+
 int main(int argc, char *argv[]){
 int retorno,i;
 int flag = 0;

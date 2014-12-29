@@ -1,3 +1,6 @@
+#ifndef RGB_QUAD_HPP
+#define RGB_QUAD_HPP
+
 class RgbQuad{
 
    BYTE  red;
@@ -31,3 +34,5 @@ class RgbQuad{
          return reserved;
       }
 };
+
+#endif
