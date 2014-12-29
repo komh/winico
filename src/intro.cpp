@@ -116,21 +116,21 @@ PEAOP2 pEABuf = NULL;
 /*********************************************************************************************/
 
 int checkType(char *archivo){
-   int largo = strlen(archivo) +1;
+   int largo = strlen(archivo);
    char *ext = "ico";
    char ver[3+1];
-   int i=0;
-   while(i<largo){
-      if(archivo[i] == '.'){
+   int i=largo-1;
+   while(i >=0){
+      if(archivo[i] == '.' && i + 3 < largo){
          ver[0] = archivo[i+1];
          ver[1] = archivo[i+2];
          ver[2] = archivo[i+3];
          ver[3] = '\0';
          break;
       }
-      i++;
+      i--;
    }
-   if((strcmp(ext,ver)!=0) || (i == (largo-1)))
+   if((strcmp(ext,ver)!=0) || (i < 0))
       return -1;
    else
       return 1;
