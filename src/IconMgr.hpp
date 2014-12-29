@@ -62,6 +62,7 @@ class Os2IconMgr12:public Os2IconMgr{
    public:
       Os2IconMgr12(){
       };
+      virtual ~Os2IconMgr12() {};
       void grabaIcono(char* nArchivo);
       void grabaImagenHeader(int i, char* nArchivo);
       void grabaImagenData(int i, char* nArchivo);

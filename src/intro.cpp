@@ -19,8 +19,6 @@ void printError(IconError& error){
 }
 
 int unoAuno(char *archivoin, char *archivout){
-int retorno;
-char *bpal;
    try{
       if(checkType(archivoin)==1){
          WiconMgr *windowMgr = new WiconMgr();
@@ -47,17 +45,11 @@ FILEFINDBUF3 findbuffer={0};
 ULONG relargobuf=sizeof(FILEFINDBUF3);
 ULONG fcontador=1;
 APIRET rc=0;
-HFILE handlearchivo=0L;
-ULONG accion=0;
-ULONG cbRead;
 ULONG numDrive = 0;
 ULONG largoDir = 0;
 BYTE dirActual[256] = "";
 CHAR dirNew[256] = "";
 PEAOP2 pEABuf = NULL;
-int indice=0;
-char *bpal;
-int retorno;
 
    try{
       largoDir = (ULONG)sizeof(dirActual);

@@ -22,7 +22,7 @@ void Os2Icon::setMaskData(PBYTE datos){
    memcpy(pMaskData+maskSize,datos,maskSize);
 }
 ULONG Os2Icon::getSizeImage(){
-   ULONG ret,res;
+   ULONG ret;
    int divisor,potencia;
    divisor = ibih->getCx()/4;
    if(ibih->getCBitCount() > 1){
@@ -39,7 +39,7 @@ ULONG Os2Icon::getSizeImage(){
 }
 
 ULONG Os2Icon::getSizeMaskImage(){
-   ULONG ret,res;
+   ULONG ret;
    switch(Mibih->getCx()){
       case 16:
          ret=64;
@@ -85,7 +85,7 @@ ULONG Os2Icon::sizePaleta(){
 }
 
 void Os2Icon12::convPal(RgbQuad *bpaleta, int colores){
-   int i, j;
+   int i;
    pPaletaColor = (RGB*)malloc(colores*sizeof(RGB));
    for(i=0;i<colores;i++){
       pPaletaColor[i].bRed = bpaleta[i].getBlue();

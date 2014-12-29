@@ -20,7 +20,7 @@ SUBDIRS :=
 CFLAGS :=
 
 # specify g++ compiler flags for all the programs
-CXXFLAGS := -DOS2EMX_PLAIN_CHAR=1
+CXXFLAGS := -Wall -DOS2EMX_PLAIN_CHAR=1
 
 # specify linker flags such as -L option for all the programs
 LDFLAGS :=

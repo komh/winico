@@ -73,7 +73,6 @@ void WiconMgr::winIniIcon() throw (IconError){
   PBYTE offset;
   PBYTE pData;
   PBYTE pIDEref;
-  int aux = 0;
   IconDir *picondir = new IconDir();
   picondir->setIdReserved((USHORT)*this->pDatos);
   picondir->setIdType((USHORT)*(pDatos+sizeof(USHORT)));
@@ -249,7 +248,6 @@ void Os2IconMgr12::llenaOffSets(){
    vector<Os2Icon12*>::iterator i = listaImagenes.begin();
    int ant = 0;
    int acuNext = 0;
-   IconBIH *aux = new IconBIH();
    int base = firstOffSet();
    int j = listaImagenes.size();
    int cont = 0;
@@ -343,7 +341,7 @@ void Os2IconMgr12::setNumImages(){
 }
 
 PBYTE Os2IconMgr::centerMaskData(PBYTE data, const int tamanio){
-   int delta,offset,i,j,largoScan,smallSize;
+   int delta,i,j,largoScan,smallSize;
    PBYTE scanor;
    PBYTE scands;
    PBYTE scanax;
@@ -417,7 +415,7 @@ PBYTE Os2IconMgr::centerMaskData(PBYTE data, const int tamanio){
 }
 
 PBYTE Os2IconMgr::centerImageData(PBYTE data, const int tamanio, int bits){
-   int delta,offset,i,largoScan,largoScanOr,ppc,numScans;
+   int delta,i,largoScan,largoScanOr,ppc,numScans;
    PBYTE scanor;
    PBYTE scands;
    PBYTE retorno;
