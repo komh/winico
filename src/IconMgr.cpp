@@ -107,6 +107,10 @@ void Os2IconMgr12::grabaIcono(char* nArchivo){
    HFILE fileHandle;
    this->llenaOffSets();
    vector<Os2Icon12*>::iterator i = listaImagenes.begin();
+   if (listaImagenes.size() == 0){
+     printf("No images to save\n");
+     exit(0);
+   }
    rc = DosOpen(nArchivo,&fileHandle,&accion,0L,FILE_NORMAL,OPEN_ACTION_CREATE_IF_NEW,OPEN_SHARE_DENYNONE|OPEN_ACCESS_WRITEONLY,0L);
    if(rc!=0){
       printf("Error al crear el archivo para guardar el icono\n");
