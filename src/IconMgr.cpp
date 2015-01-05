@@ -386,9 +386,9 @@ PBYTE Os2IconMgr::centerMaskData(PBYTE data, const int tamanio){
       if(tamanio == ICONO_40X40){
          while(j<5){
             aux1 = *scandsX & 15;
-            *scandsX = *scandsX >> 4;
+            *scandsX = (*scandsX >> 4) & 15;
             *scandsX = *scandsX | aux2;
-            aux2 = aux1 << 4;
+            aux2 = (aux1 << 4) & 240;
             scandsX++;
             j++;
          }
@@ -401,9 +401,9 @@ PBYTE Os2IconMgr::centerMaskData(PBYTE data, const int tamanio){
       else{
          while(j<3){
             aux1 = *scandsX & 3;
-            *scandsX = *scandsX >> 2;
+            *scandsX = (*scandsX >> 2) & 63;
             *scandsX = *scandsX | aux2;
-            aux2 = aux1 << 6;
+            aux2 = (aux1 << 6) & 192;
             scandsX++;
             j++;
          }
