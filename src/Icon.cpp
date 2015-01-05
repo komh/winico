@@ -76,7 +76,7 @@ ULONG Os2Icon::sizePaleta(){
    ULONG buffer;
    int porte;
    int numbits = getIbih()->getCPlanes()*getIbih()->getCBitCount();
-   if(numbits != 24)
+   if(numbits != 24 && numbits != 32)
       porte = ipow(2,numbits);
    else
       porte = 0;
@@ -115,7 +115,7 @@ Os2Icon12::Os2Icon12(IconImage *imagenWin){
    pArray = new BITMAPARRAYFILEHEADER;
    pHead = new BITMAPFILEHEADER;
    //No configuro la paleta de colores si es un icono de 24 bits
-   if(imagenWin->getBitsXPixel() != 24)
+   if(imagenWin->getBitsXPixel() != 24 && imagenWin->getBitsXPixel() != 32)
       convPal(imagenWin->getIcColors(),imagenWin->getNumColores());
    setNumBitsColores(imagenWin->getBitsXPixel());
    setPalBW();

@@ -11,7 +11,7 @@ class IconImage{
          icHeader = (BitmapHeader *)pImgData;
          //Calculates the number of bytes of this image
          numBytesInImg = ((icHeader->getBiHeight()/2)*icHeader->getBiWidth()*icHeader->getBiBitCount())/8;
-         if(getBitsXPixel() != 24){
+         if(getBitsXPixel() != 24 && getBitsXPixel() != 32){
             icColors = (RgbQuad *)(pImgData + sizeof(BitmapHeader));
             icXor = (PBYTE)(pImgData + sizeof(BitmapHeader) + (ipow(2,icHeader->getBiBitCount()) * sizeof(RgbQuad)));
             //Set the pointer of the AND mask
