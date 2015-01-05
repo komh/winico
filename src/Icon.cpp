@@ -42,16 +42,19 @@ ULONG Os2Icon::getSizeMaskImage(){
    ULONG ret;
    switch(Mibih->getCx()){
       case 16:
-         ret=64;
+         ret=64;    // = 16 * 16 / ( 16 / 4 ), see getSizeImage()
          break;
       case 20:
-         ret=80;
+         ret=80;    // = 20 * ( 20 / 5 ), see getSizeImage()
          break;
       case 32:
-         ret=128;
+         ret=128;   // = 32 * 32 / ( 32 / 4 ), see getSizeImage()
          break;
       case 40:
-         ret=320;
+         ret=320;   // = 40 * ( 40 / 5 ), see getSizeImage()
+         break;
+      case 64:
+         ret=512;   // = 64 * 64 / 8
          break;
       default:
          break;

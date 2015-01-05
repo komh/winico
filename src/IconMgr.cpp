@@ -15,13 +15,15 @@ Os2IconMgr12* WiconMgr::codecOs2Icon12(){
    //Se parte de la imagen mas peque¤a para que el WPS asuma la imagen mas grande al desplegarla
    for(int i=numImagenes-1; i >= 0;i--){
       //Solo proceso las imagenes de 16x16 y 32x32
-      if(iconoWindows->getIdEntries()[i]->getBWidth() == 16 || iconoWindows->getIdEntries()[i]->getBWidth() == 32){
+      if(iconoWindows->getIdEntries()[i]->getBWidth() == 16 || iconoWindows->getIdEntries()[i]->getBWidth() == 32
+         || iconoWindows->getIdEntries()[i]->getBWidth() == 64){
          IconImage *imagenWin = iconoWindows->getIdEntries()[i]->getIconImage();
          Os2Icon12 *newIconWarp = new Os2Icon12(imagenWin);
          //Agrego al manager la imagen del icono
          iconoWarp->addImage(newIconWarp);
          //Dependiendo de si es una imagen de 16 o 32 se crea una imagen ya sea de 20 o 40
-         iconoWarp->addImageGrande(newIconWarp);
+         if(iconoWindows->getIdEntries()[i]->getBWidth() < 40)
+            iconoWarp->addImageGrande(newIconWarp);
       }
    }
    iconoWarp->setNumImages();
@@ -264,7 +266,7 @@ void Os2IconMgr12::llenaOffSets(){
       }
       (*i)->getPArray()->bfh.offBits = base;
       (*i)->getIbih()->setIBIH(&((*i)->getPArray()->bfh.bmp));
-      ant = (*i)->getSizeImage();
+      ant = (*i)->getMaskSize() * 2;
       (*i)->getPHead()->offBits = base + ant;
       (*i)->getIbih()->setIBIH(&((*i)->getPHead()->bmp));
       ant = ant + (*i)->getSizeImage();
