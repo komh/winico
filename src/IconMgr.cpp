@@ -14,9 +14,17 @@ Os2IconMgr12* WiconMgr::codecOs2Icon12(){
    Os2IconMgr12 *iconoWarp = new Os2IconMgr12();
    //Se parte de la imagen mas peque¤a para que el WPS asuma la imagen mas grande al desplegarla
    for(int i=numImagenes-1; i >= 0;i--){
+      cout << "Found image : "
+           << (int)iconoWindows->getIdEntries()[i]->getBWidth() << "x"
+           << (int)iconoWindows->getIdEntries()[i]->getBWidth() << "x"
+           << (int)iconoWindows->getIdEntries()[i]->getIconImage()->getBitsXPixel()
+           << ", ";
+
       //Solo proceso las imagenes de 16x16 y 32x32
       if(iconoWindows->getIdEntries()[i]->getBWidth() == 16 || iconoWindows->getIdEntries()[i]->getBWidth() == 32
          || iconoWindows->getIdEntries()[i]->getBWidth() == 64){
+         cout << "Converting..." << endl;
+
          IconImage *imagenWin = iconoWindows->getIdEntries()[i]->getIconImage();
          Os2Icon12 *newIconWarp = new Os2Icon12(imagenWin);
          //Agrego al manager la imagen del icono
@@ -25,6 +33,8 @@ Os2IconMgr12* WiconMgr::codecOs2Icon12(){
          if(iconoWindows->getIdEntries()[i]->getBWidth() < 40)
             iconoWarp->addImageGrande(newIconWarp);
       }
+      else
+        cout << "Not supported !!!" << endl;
    }
    iconoWarp->setNumImages();
    return iconoWarp;
@@ -145,6 +155,9 @@ void Os2IconMgr12::grabaIcono(char* nArchivo){
       }
       i = listaImagenes.begin();
       while(i != listaImagenes.end()){
+         printf("Writing %dx%dx%d image...\n",
+                (*i)->getAncho(), (*i)->getAlto(), (*i)->getBitsXPixel());
+
          rc = DosWrite(fileHandle,(*i)->getMaskData(),((*i)->getMaskSize()*2),&bwrote);
          if(rc!=0)
             printf("Error al grabar los datos de la mascara\n");
