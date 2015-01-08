@@ -14,27 +14,34 @@ Os2IconMgr12* WiconMgr::codecOs2Icon12(){
    Os2IconMgr12 *iconoWarp = new Os2IconMgr12();
    //Se parte de la imagen mas peque¤a para que el WPS asuma la imagen mas grande al desplegarla
    for(int i=numImagenes-1; i >= 0;i--){
+      IconDirEntry *entry = iconoWindows->getIdEntries()[i];
+      int width = entry->getBWidth();
+      IconImage *imagenWin = entry->getIconImage();
+
       cout << "Found image : "
-           << (int)iconoWindows->getIdEntries()[i]->getBWidth() << "x"
-           << (int)iconoWindows->getIdEntries()[i]->getBWidth() << "x"
-           << (int)iconoWindows->getIdEntries()[i]->getIconImage()->getBitsXPixel()
+           << width << "x" << width << "x" << imagenWin->getBitsXPixel()
            << ", ";
 
       //Solo proceso las imagenes de 16x16 y 32x32
-      if(iconoWindows->getIdEntries()[i]->getBWidth() == 16 || iconoWindows->getIdEntries()[i]->getBWidth() == 32
-         || iconoWindows->getIdEntries()[i]->getBWidth() == 64){
-         cout << "Converting..." << endl;
+      switch(width){
+         case 16:
+         case 32:
+         case 64:{
+            cout << "Converting..." << endl;
 
-         IconImage *imagenWin = iconoWindows->getIdEntries()[i]->getIconImage();
-         Os2Icon12 *newIconWarp = new Os2Icon12(imagenWin);
-         //Agrego al manager la imagen del icono
-         iconoWarp->addImage(newIconWarp);
-         //Dependiendo de si es una imagen de 16 o 32 se crea una imagen ya sea de 20 o 40
-         if(iconoWindows->getIdEntries()[i]->getBWidth() < 40)
-            iconoWarp->addImageGrande(newIconWarp);
+            Os2Icon12 *newIconWarp = new Os2Icon12(imagenWin);
+            //Agrego al manager la imagen del icono
+            iconoWarp->addImage(newIconWarp);
+            //Dependiendo de si es una imagen de 16 o 32 se crea una imagen ya sea de 20 o 40
+            if(width < 40)
+               iconoWarp->addImageGrande(newIconWarp);
+            break;
+         }
+
+         default:
+            cout << "Not supported !!!" << endl;
+            break;
       }
-      else
-        cout << "Not supported !!!" << endl;
    }
    iconoWarp->setNumImages();
    return iconoWarp;
