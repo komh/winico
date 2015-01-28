@@ -1,0 +1,27 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: winico@SHORT_VER@.zip
+       Short Description: WinIco v@VER@
+        Long Description: WinIco v@VER@
+This program is to convert icons from the Win32 format into the OS/2 format
+(v 1.2). Source codes are included. Released as Open Source under the GNU GPL
+License. Original author is Leonardo Pino.
+
+      Proposed directory
+           for placement: /pub/os2/apps/graphics/convert/
+
+               Your name: KO Myung-Hun
+           Email address: komh@chollian.net
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: https://github.com/komh/winico
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version:
+ Additional requirements: kLIBC v0.6.6
+
+                Replaces: (none)
