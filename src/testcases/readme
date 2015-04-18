@@ -1,0 +1,9 @@
+kalarm.ico:
+    IconEdit cannot load 16x16 icon. Converting 32 bits to 24 bits.
+    If an icon is selected, inversed image has glitches in background.
+
+qmetrics.ico:
+    64x64 icon is not converted correctly.
+
+vlc.ico:
+    WinIco crashes due to zero-image-size in bitmap header.
