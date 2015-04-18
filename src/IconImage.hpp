@@ -11,7 +11,7 @@ class IconImage{
          icHeader = (BitmapHeader *)pImgData;
          //Calculates the number of bytes of this image
          numBytesInImg = ((icHeader->getBiHeight()/2)*icHeader->getBiWidth()*icHeader->getBiBitCount())/8;
-         if(getBitsXPixel() != 24 && getBitsXPixel() != 32){
+         if(getBitsXPixel() < 24){
             icColors = (RgbQuad *)(pImgData + sizeof(BitmapHeader));
             icXor = (PBYTE)(pImgData + sizeof(BitmapHeader) + (ipow(2,icHeader->getBiBitCount()) * sizeof(RgbQuad)));
             //Set the pointer of the AND mask
@@ -23,6 +23,8 @@ class IconImage{
          }
          //Calculates the number of colors of this image
          numcolores = ipow(2,icHeader->getBiBitCount()*icHeader->getBiPlanes());
+         //Calculate the stride of AND map which 1 bpp
+         andStride = ((icHeader->getBiWidth() + 7) / 8 + 3) & ~3;
       }
       BitmapHeader* getBitmapHeader(){
          return icHeader;
@@ -35,6 +37,13 @@ class IconImage{
       }
       PBYTE getIcAnd(){
          return icAnd;
+      }
+      int getIcAndPixel(int x, int y) {
+         // AND map is 1 bpp
+         int xBytes = x / 8;
+         int xBit = 7 - (x % 8);
+
+         return (*((icAnd + y * andStride) + xBytes ) >> xBit) & 1;
       }
       int ipow(int b, int e){
          int p=b;
@@ -71,6 +80,7 @@ class IconImage{
       PBYTE icAnd;
       int numcolores;
       int numBytesInImg;
+      int andStride;
 };
 
 #endif

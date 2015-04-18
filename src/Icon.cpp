@@ -3,6 +3,27 @@
 
 #include "Icon.hpp"
 
+static inline int calcStride(int w, int bpp)
+{
+   int stride;
+
+   // Convert pixel to bits
+   stride = w * bpp;
+
+   // Conver to bytes
+   stride = (stride + 7) / 8;
+
+   // Align with 4 bytes boundary
+   stride = (stride + 3 ) & ~3;
+
+   return stride ;
+}
+
+static inline int calcImageSize(int w, int h, int bpp)
+{
+    return calcStride(w, bpp) * h;
+}
+
 int Os2Icon::ipow(int b, int e){
    int p=b;
    while(--e)
@@ -22,42 +43,19 @@ void Os2Icon::setMaskData(PBYTE datos){
    memcpy(pMaskData+maskSize,datos,maskSize);
 }
 ULONG Os2Icon::getSizeImage(){
-   ULONG ret;
-
-   // Convert pixel to bits
-   ret = ibih->getCx() * ibih->getCBitCount();
-
-   // Conver to bytes
-   ret = (ret + 7) / 8;
-
-   // Align with 4 bytes boundary
-   ret = (ret + 3 ) & ~3;
-
-   // Return the image size
-   return ret * ibih->getCy();
+   return calcImageSize(ibih->getCx(), ibih->getCy(), ibih->getCBitCount());
 }
 
 ULONG Os2Icon::getSizeMaskImage(){
-   ULONG ret;
-
-   // Convert pixel to bits
-   ret = Mibih->getCx(); // Mask image is 1 bits per pixel
-
-   // Conver to bytes
-   ret = (ret + 7) / 8;
-
-   // Align with 4 bytes boundary
-   ret = (ret + 3 ) & ~3;
-
-   // Return the size of mask image which is square
-   return ret * Mibih->getCx();
+   // Mask image is square and 1 bpp.
+   return calcImageSize(Mibih->getCx(), Mibih->getCx(), 1);
 }
 
 ULONG Os2Icon::sizePaleta(){
    ULONG buffer;
    int porte;
    int numbits = getIbih()->getCPlanes()*getIbih()->getCBitCount();
-   if(numbits != 24 && numbits != 32)
+   if(numbits != 24)
       porte = ipow(2,numbits);
    else
       porte = 0;
@@ -95,12 +93,63 @@ Os2Icon12::Os2Icon12(IconImage *imagenWin){
    bih = new BITMAPINFOHEADER;
    pArray = new BITMAPARRAYFILEHEADER;
    pHead = new BITMAPFILEHEADER;
+   int winBpp = imagenWin->getBitsXPixel();
    //No configuro la paleta de colores si es un icono de 24 bits
-   if(imagenWin->getBitsXPixel() != 24 && imagenWin->getBitsXPixel() != 32)
+   if(winBpp < 24)
       convPal(imagenWin->getIcColors(),imagenWin->getNumColores());
-   setNumBitsColores(imagenWin->getBitsXPixel());
+   setNumBitsColores(winBpp < 24 ? winBpp : 24);
    setPalBW();
-   setDataImage(imagenWin->getIcXor(),imagenWin->getNumBytes());
+
+   PBYTE dataImage = imagenWin->getIcXor();
+   int numBytes = imagenWin->getNumBytes();
+   // 32 bpp ? Then convert to 24 bpp
+   if(winBpp == 32)
+   {
+      PBYTE src;
+      PBYTE dst;
+      int w = imagenWin->getBitmapHeader()->getBiWidth();
+      int h = imagenWin->getBitmapHeader()->getBiHeight() / 2;
+      int srcStride = calcStride(w, 32);
+      int dstStride = calcStride(w, 24);
+      int x;
+      int y;
+
+      src = dataImage;
+      numBytes = dstStride * h;
+      dataImage = (PBYTE)calloc(numBytes, 1);
+      dst = dataImage;
+
+      for(y = 0; y < h; y++)
+      {
+         for(x = 0; x < w; x++)
+         {
+            // Consider AND map
+            if (imagenWin->getIcAndPixel(x, y))
+            {
+               *dst++ = 0; src++;
+               *dst++ = 0; src++;
+               *dst++ = 0; src++;
+            }
+            else
+            {
+               *dst++ = *src++;
+               *dst++ = *src++;
+               *dst++ = *src++;
+            }
+
+            // skip alpha value
+            src++;
+         }
+
+         // skip remains bytes
+         src += srcStride - w * 4; // 32 bpp
+         dst += dstStride - w * 3; // 24 bpp
+      }
+   }
+   setDataImage(dataImage, numBytes);
+   if(winBpp == 32)
+      free(dataImage);
+
    setArray();
    setDatos(imagenWin);
    setXorAnd(imagenWin);
@@ -144,6 +193,8 @@ int Os2Icon12::setDatos(IconImage *datos){
    pHead->bmp.cPlanes      =datos->getBitmapHeader()->getBiPlanes();
 //   pHead->bmp.cBitCount    =datos->getBitmapHeader()->getBiBitCount();
    pHead->bmp.cBitCount    =datos->getBitsXPixel();
+   if (pHead->bmp.cBitCount == 32)
+    pHead->bmp.cBitCount = 24;
    ibih->setIBIH(&pHead->bmp);
    return 0;
 }

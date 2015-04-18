@@ -150,7 +150,7 @@ void Os2IconMgr12::grabaIcono(char* nArchivo){
          rc = DosWrite(fileHandle,(*i)->getPHead(),sizeof(BITMAPFILEHEADER),&bwrote);
          if(rc!=0)
             printf("Error al grabar el encabezado del la imagen color\n");
-         if((*i)->getBitsXPixel() != 24 && (*i)->getBitsXPixel() != 32){
+         if((*i)->getBitsXPixel() != 24){
             rc = DosWrite(fileHandle,(*i)->getPPaletaColor(),(*i)->sizePaleta(),&bwrote);
             if(rc!=0)
                printf("Error al grabar la paleta de la imagen color\n");
@@ -442,7 +442,7 @@ PBYTE Os2IconMgr::centerImageData(PBYTE data, const int tamanio, int bits){
    PBYTE scanor;
    PBYTE scands;
    PBYTE retorno;
-   if(bits==24 || bits==32)
+   if(bits==24)
       ppc=bits/8;
    else
       ppc=1;
