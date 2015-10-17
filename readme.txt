@@ -33,6 +33,12 @@ executed)
 
 History
 
+0.94 ( 2015/04/25 )
+- Some 32-bits icons cannot be loaded by ICONEDIT. Fixed by converting 32-bits
+  icons to 24-bits icons
+- There are some gliches of 24-bits icons converted from 32-bits icons when
+  icons are inverted by selecting them. Fixed by considering AND map
+
 0.93 ( 2015/01/28 )
 - Support kLIBC and GNU Make build system
 - Support arbitrary image sizes
