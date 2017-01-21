@@ -3,6 +3,7 @@
 #include <os2.h>
 
 #include <iostream>
+#include <cstring>
 
 #include "Icon.hpp"
 #include "IconMgr.hpp"

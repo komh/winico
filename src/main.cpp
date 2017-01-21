@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <cstring>
 
 // declared in intro.cpp
 int unoAuno(char *archivoin, char *archivout);
