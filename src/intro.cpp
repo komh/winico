@@ -118,7 +118,7 @@ PEAOP2 pEABuf = NULL;
 
 int checkType(char *archivo){
    int largo = strlen(archivo);
-   char *ext = "ico";
+   char ext[] = "ico";
    char ver[3+1];
    int i=largo-1;
    while(i >=0){
