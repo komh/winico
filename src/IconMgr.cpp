@@ -368,7 +368,6 @@ PBYTE Os2IconMgr::centerMaskData(PBYTE data, const int tamanio){
    int delta,i,j,largoScan,smallSize;
    PBYTE scanor;
    PBYTE scands;
-   PBYTE scanax;
    PBYTE scandsX;
    PBYTE retorno;
    BYTE aux1 = 0;
@@ -377,8 +376,6 @@ PBYTE Os2IconMgr::centerMaskData(PBYTE data, const int tamanio){
       delta = 2;
       retorno = (PBYTE)malloc(80);
       memset(retorno,255,80);
-      scanor = (PBYTE)malloc(4);
-      scands = (PBYTE)malloc(4);
       scanor = (PBYTE)data+64;
       smallSize = 16;
       aux2 = 192;
@@ -387,9 +384,6 @@ PBYTE Os2IconMgr::centerMaskData(PBYTE data, const int tamanio){
       delta = 4;
       retorno = (PBYTE)malloc(320);
       memset(retorno,255,320);
-      scanor = (PBYTE)malloc(4);
-      scanax = (PBYTE)malloc(4);
-      scands = (PBYTE)malloc(8);
       scanor = (PBYTE)data+128;
       smallSize = 32;
       aux2=240;
