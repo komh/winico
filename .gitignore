@@ -3,3 +3,4 @@
 *.exe
 *.o
 *.obj
+src/testcases/*_os2.ico
