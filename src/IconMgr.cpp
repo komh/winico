@@ -433,39 +433,34 @@ PBYTE Os2IconMgr::centerMaskData(PBYTE data, const int tamanio){
 }
 
 PBYTE Os2IconMgr::centerImageData(PBYTE data, const int tamanio, int bits){
-   int delta,i,largoScan,largoScanOr,ppc,numScans;
+   int delta,i,largoScan,largoScanOr,numScans;
    PBYTE scanor;
    PBYTE scands;
    PBYTE retorno;
-   if(bits==24)
-      ppc=bits/8;
-   else
-      ppc=1;
    if(tamanio == ICONO_20X20){
       delta = 2;
       numScans=16;
-      largoScan = 20*ppc;
-      largoScanOr = 16*ppc;
-      retorno = (PBYTE)malloc(400*ppc);
+      largoScan = calcStride(20, bits);
+      largoScanOr = calcStride(16, bits);
+      retorno = (PBYTE)malloc(largoScan * 20);
       // El color de fondo es el mismo del primer dato (si no fuera fondo, la imagen saldra corrupta)
-      memset(retorno,*data,400*ppc);
+      memset(retorno,*data,largoScan * 20);
    }
    else if(tamanio == ICONO_40X40){
       delta = 4;
       numScans=32;
-      largoScan = 40*ppc;
-      largoScanOr = 32*ppc;
-      retorno = (PBYTE)malloc(1600*ppc);
+      largoScan = calcStride(40, bits);
+      largoScanOr = calcStride(32, bits);
+      retorno = (PBYTE)malloc(largoScan * 40);
       // El color de fondo es el mismo del primer dato (si no fuera fondo, la imagen saldra corrupta)
-      memset(retorno,*data,1600*ppc);
+      memset(retorno,*data,largoScan * 40);
    }
    scands = retorno + largoScan * delta;
    scanor = data;
    i=0;
    while(i < numScans){
-      scands = scands + delta*ppc;
-      memcpy(scands,scanor,largoScanOr);
-      scands = scands + delta*ppc + largoScanOr;
+      memcpy(scands + delta * bits / 8,scanor,largoScanOr);
+      scands = scands + largoScan;
       scanor = scanor + largoScanOr;
       i++;
    }

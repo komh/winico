@@ -7,7 +7,8 @@ if rc \= 0 then
 
 sWinIconList = 'testcases\qmetrics.ico',
                'testcases\vlc.ico',
-               'testcases\kalarm.ico'
+               'testcases\kalarm.ico',
+               'testcases\mksh.ico'
 
 call convert sWinIconList
 

@@ -8,6 +8,27 @@
 #include "IconsVar.hpp"
 #include "IconImage.hpp"
 
+static inline int calcStride(int w, int bpp)
+{
+   int stride;
+
+   // Convert pixel to bits
+   stride = w * bpp;
+
+   // Conver to bytes
+   stride = (stride + 7) / 8;
+
+   // Align with 4 bytes boundary
+   stride = (stride + 3) & ~3;
+
+   return stride ;
+}
+
+static inline int calcImageSize(int w, int h, int bpp)
+{
+    return calcStride(w, bpp) * h;
+}
+
 struct IconError{
    const char* msg;
    const char* function;

@@ -7,3 +7,6 @@ qmetrics.ico:
 
 vlc.ico:
     WinIco crashes due to zero-image-size in bitmap header.
+
+mksh.ico:
+    4bits icons( 16x16, 32x32 ) are not converted correctly.
