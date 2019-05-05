@@ -1,12 +1,12 @@
 ===============================================================================
 2005/01/01
 
-WINICO had been released as Open Souce under the GNU GPL License.
+WINICO has been released as Open Source under the GNU GPL License.
 
-The source code had been included on this file (source.zip) and it is compiled
-used VACC 4.0.
+The source code has been included on this file (source.zip) and it is compiled
+using VACC 4.0.
 
-Special Thanks to Leonardo Pino for releasing the source code of this program.
+Special thanks to Leonardo Pino for releasing the source code of this program.
 
 2015/01/28
 
@@ -36,7 +36,7 @@ History
 0.94 ( 2015/04/25 )
 - Some 32-bits icons cannot be loaded by ICONEDIT. Fixed by converting 32-bits
   icons to 24-bits icons
-- There are some gliches of 24-bits icons converted from 32-bits icons when
+- There are some glitches of 24-bits icons converted from 32-bits icons when
   icons are inverted by selecting them. Fixed by considering AND map
 
 0.93 ( 2015/01/28 )
@@ -56,7 +56,7 @@ History
 - Fix some minor bugs
 
 0.9
-- Inicial public release
+- Initial public release
 
 To do
 
