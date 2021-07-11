@@ -13,7 +13,7 @@ void WiconMgr::grabaIcono(char* fileName){
 
 Os2IconMgr12* WiconMgr::codecOs2Icon12(){
    Os2IconMgr12 *iconoWarp = new Os2IconMgr12();
-   //Se parte de la imagen mas peque¤a para que el WPS asuma la imagen mas grande al desplegarla
+   //Se parte de la imagen mas pequeÂ¤a para que el WPS asuma la imagen mas grande al desplegarla
    for(int i=numImagenes-1; i >= 0;i--){
       IconDirEntry *entry = iconoWindows->getIdEntries()[i];
       int width = entry->getBWidth();
@@ -25,7 +25,7 @@ Os2IconMgr12* WiconMgr::codecOs2Icon12(){
 
       switch(width){
          case 0:
-            cout << "Not suppored !!!" << endl;
+            cout << "Not supported !!!" << endl;
             break;
 
          default:{
@@ -70,7 +70,7 @@ void WiconMgr::cargaIcono(char* fileName) throw (IconError){
    else{
       rc = DosQueryFileInfo(handleArchivo,FIL_STANDARD,&fileInfo,bufSize);
       if(rc != 0){
-         cout<<"Error al traer la informaci¢n del archivo" <<endl;
+         cout<<"Error al traer la informaciÂ¢n del archivo" <<endl;
       }
       fileSize = fileInfo.cbFile;
       retorno = (PBYTE)malloc(sizeof(PBYTE)*fileSize);
@@ -308,7 +308,7 @@ Os2Icon12* Os2IconMgr12::creaGrande(Os2Icon12 *warpIcon){
    *pArrayAux = *granWarpIcon->getPArray();
    //Si se trata de una imagen de 16x16 seteo los encabezados de las
    //estructuras con los de una imagen de 20x20 y configuro los datos
-   //para los nuevos tama¤os
+   //para los nuevos tamaÂ¤os
    if(warpIcon->getAlto() == 16){
       //Inicializa los valores de la cabezera de la imagen en colores
       pBfhAux->usType = BFT_COLORICON;
