@@ -25,7 +25,7 @@ Os2IconMgr12* WiconMgr::codecOs2Icon12(){
 
       switch(width){
          case 0:
-            cout << "Not suppored !!!" << endl;
+            cout << "Not supported !!!" << endl;
             break;
 
          default:{
